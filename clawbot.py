@@ -1,4 +1,3 @@
-import os
 import asyncio
 from telegram import Update
 from telegram.ext import (
@@ -7,14 +6,16 @@ from telegram.ext import (
     ContextTypes,
 )
 
-# Read token from environment
-BOT_TOKEN = os.getenv("7993689388:AAH8Kif0BVVM_gfC1cOVvuGh_EMHxhg9aoc")
-
-if not BOT_TOKEN:
-    raise RuntimeError("BOT_TOKEN is missing! Set it in Railway Variables.")
+# =========================
+# 🔑 TELEGRAM BOT TOKEN
+# =========================
+BOT_TOKEN = "7993689388:AAH8KiF0BVWM_gfC1c0VvuGh_EMHxhg9aoc"
+# =========================
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("🤖 Bot is alive and running on Railway!")
+    await update.message.reply_text(
+        "🤖 Bot is alive and running on Railway!"
+    )
 
 async def main():
     print("🚀 Starting ClawBot...")
@@ -26,6 +27,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
 
 
