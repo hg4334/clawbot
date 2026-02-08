@@ -1,31 +1,22 @@
-import asyncio
-from telegram import Update
-from telegram.ext import (
-    ApplicationBuilder,
-    CommandHandler,
-    ContextTypes,
-)
+from telegram.ext import Updater, CommandHandler
 
-# =========================
-# 🔑 TELEGRAM BOT TOKEN
-# =========================
 BOT_TOKEN = "7993689388:AAH8KiF0BVWM_gfC1c0VvuGh_EMHxhg9aoc"
-# =========================
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
+def start(update, context):
+    update.message.reply_text(
         "🤖 Bot is alive and running on Railway!"
     )
 
-async def main():
+def main():
     print("🚀 Starting ClawBot...")
 
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
+    updater = Updater(BOT_TOKEN, use_context=True)
+    dp = updater.dispatcher
 
-    await app.run_polling()
+    dp.add_handler(CommandHandler("start", start))
+
+    updater.start_polling()
+    updater.idle()
 
 if __name__ == "__main__":
-    asyncio.run(main())
-
-
+    main()
